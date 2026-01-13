@@ -11,7 +11,7 @@ sqs = boto3.client('sqs')
 
 TABLE_NAME = os.environ["TABLE_NAME"]       
 QUEUE_URL = os.environ.get("QUEUE_URL")     
-
+# Set TABLE_NAME and QUEUE_URL in enviroment variables
 
 table = dynamodb.Table(TABLE_NAME)
 
