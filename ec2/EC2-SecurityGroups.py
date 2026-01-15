@@ -71,7 +71,7 @@ def dynamodb_table(groupname, group_id, cidr, port, protocol, ownerid):
     
     finding = {
         "finding_id": finding_id,
-        "check_type": "Security Group",
+        "check_type": "security-group-public",
         "resource_type": "EC2",
         "resource": f"{groupname} ({group_id})",
         "account_id": ownerid,
