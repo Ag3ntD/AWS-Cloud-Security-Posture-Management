@@ -74,6 +74,25 @@ def dynamodb_table(snapshot_id, account_id):
     return 0
 
 def lambda_handler(event, context):
+    account_id = context.invoked_function_arn.split(":")[4]
+    
+    detail = event.get("detail", {})
+    request_params = detail.get("requestParameters", {})
+    snapshot_id = request_params.get("dBSnapshotIdentifier")
+    
+    if not snapshot_id:
+        print("No snapshot ID in event, scanning all snapshots")
+        response = rds.describe_db_snapshots()
+        snapshots_to_check = response["DBSnapshots"]
+    else:
+        print(f"Event-driven: checking snapshot {snapshot_id}")
+        try:
+            response = rds.describe_db_snapshots(DBSnapshotIdentifier=snapshot_id)
+            snapshots_to_check = response["DBSnapshots"]
+        except Exception as e:
+            print(f"Error fetching snapshot {snapshot_id}: {e}")
+            return {'statusCode': 500, 'body': json.dumps({'error': str(e)})}
+        
     response = rds.describe_db_snapshots()
     account_id = context.invoked_function_arn.split(":")[4]
     
