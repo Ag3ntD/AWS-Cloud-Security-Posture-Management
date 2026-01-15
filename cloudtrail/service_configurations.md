@@ -21,6 +21,7 @@
 ### CloudTrail
 - `cloudtrail:ListTrails`
 - `cloudtrail:DescribeTrails`
+-  `cloudtrail:GetTrailStatus`
 - **Resource:** "*"
 
 
