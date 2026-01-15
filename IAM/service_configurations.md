@@ -2,6 +2,8 @@
 
 ## IAM Role
 
+**NOTE** ONLY SCANS IAM USERS
+
 **Lambda Execution Role:** `iam-passrole-scanner-lambda-role`
 
 **Permissions (Least Privilege):**
